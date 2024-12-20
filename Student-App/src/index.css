@@ -1,0 +1,7 @@
+.hide,
+.show {
+    margin: 30px 10px;
+    padding: 10px;
+    background-color: paleturquoise;
+    border: 1px solid #777;
+}

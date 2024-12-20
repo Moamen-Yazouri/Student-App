@@ -1,0 +1,26 @@
+.container{
+    background-color: #eee;
+    height: 20vh;
+    width: fit-content;
+    padding: 30px 20px;
+    margin: 20px auto;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container input {
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid #777;
+
+}
+.container div label {
+    color: brown;
+    font-size: 18px;
+    font-weight: 900;
+}
+.container div:nth-child(3) input {
+    margin-bottom: 0;
+}

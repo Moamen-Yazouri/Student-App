@@ -1,0 +1,36 @@
+.student-wrapper {
+    background-color: #efefef;
+    margin-bottom: 20px;
+    width: 100%;
+    padding-top: 10px;
+}
+.student-wrapper h1 {
+    margin: 20px 0;
+    font-size: 40px;
+    padding: 0;
+    color: cadetblue;
+}
+.student-wrapper p {
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+.student-wrapper button {
+    background-color: cadetblue;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #777;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+.student-wrapper button:last-of-type {
+    width: 50px;
+    border-radius: 20px;
+}
+.student-wrapper > button {
+    margin-right: 10px;
+}
+
