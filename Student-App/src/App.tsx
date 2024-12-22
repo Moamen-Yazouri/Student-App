@@ -40,19 +40,24 @@ function App() {
   const [totalAbsent, setTotalAbsent] = useState(0);
 
   const showStudents = () => {
-    const students = [...studentsList];
-    setStudents(students);
+    setStudents(studentsList);
   }
   
   const hideStudents = () => {
     setStudents([]);
   }
+  
   const handleTotal = (change: number) => {
     setTotalAbsent(totalAbsent + change)
   }
+
+  const addNewStudent = (std: IStudent) => {
+    studentsList.unshift(std);
+    setStudents(studentsList);
+  }
   return (
     <>
-      <Form/>
+      <Form passStudent={addNewStudent}/>
       <button className= "show" onClick= {showStudents} >Show Students</button>
       <button className= "hide" onClick= {hideStudents} >Hide Students</button>
       <h2>Total Absents : {totalAbsent}</h2>

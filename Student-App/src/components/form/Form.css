@@ -1,6 +1,6 @@
 .container{
     background-color: #eee;
-    height: 20vh;
+    height: 30vh;
     width: fit-content;
     padding: 30px 20px;
     margin: 20px auto;
@@ -23,4 +23,15 @@
 }
 .container div:nth-child(3) input {
     margin-bottom: 0;
+}
+.container > button {
+    margin-top: 20px;
+    background-color: rgb(150, 47, 47);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #777;
+}
+.container > button:hover {
+    opacity: 0.9;
 }
