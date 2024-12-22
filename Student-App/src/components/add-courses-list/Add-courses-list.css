@@ -1,0 +1,25 @@
+form {
+    background-color: white;
+    padding: 10px 15px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+form #courseName {
+    margin: 0;
+    margin-left: 10px;
+}
+form label {
+    color: brown;
+    font-weight: 900;
+}
+form div {
+    width: 100%;
+    margin-top: 10px;
+}
+form input[type="submit"] {
+    padding: 5px 10px;
+    cursor: pointer;
+}   

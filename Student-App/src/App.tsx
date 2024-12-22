@@ -46,14 +46,14 @@ function App() {
   const hideStudents = () => {
     setStudents([]);
   }
-  
+
   const handleTotal = (change: number) => {
     setTotalAbsent(totalAbsent + change)
   }
 
   const addNewStudent = (std: IStudent) => {
     studentsList.unshift(std);
-    setStudents(studentsList);
+    setStudents([...studentsList])
   }
   return (
     <>

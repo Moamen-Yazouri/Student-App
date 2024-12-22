@@ -1,6 +1,6 @@
 .container{
     background-color: #eee;
-    height: 30vh;
+    height: auto;
     width: fit-content;
     padding: 30px 20px;
     margin: 20px auto;
@@ -25,6 +25,7 @@
     margin-bottom: 0;
 }
 .container > button {
+    display: inline;
     margin-top: 20px;
     background-color: rgb(150, 47, 47);
     color: white;
@@ -34,4 +35,7 @@
 }
 .container > button:hover {
     opacity: 0.9;
+}
+.container ul {
+    padding: 0;
 }

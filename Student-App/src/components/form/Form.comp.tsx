@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Form.css";
 import { IStudent } from "../../types/student";
+import AddCourses from '../add-courses-list/Add-courses-list.tsx';
 interface IProps {
     passStudent: (student: IStudent) => void
 }
@@ -11,7 +12,9 @@ const Form = (props: IProps) =>{
     const handleChange = (filed: string, value: any)  => {
         setStudent({...student, [filed]: value})
     }
-
+    const addCourses = (courses: string[]) => {
+        setStudent({...student, coursesList: courses})
+    }
     const handleSubmitting = () => {
         const newStudent = {...student, id: Date.now()}
         props.passStudent(newStudent);
@@ -52,6 +55,7 @@ const Form = (props: IProps) =>{
                 onChange={e => handleChange("graduated", e.target.checked)}
                 />
             </div>
+            <AddCourses passList={addCourses}/>
             <button onClick={handleSubmitting}>Add Student</button>
             <button onClick={clearinputs}>Reset</button>
         </div>
