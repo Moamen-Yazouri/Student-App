@@ -8,20 +8,21 @@ const AddCourses = (props: IProp) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>)  => {
         event.preventDefault()
-        const newCourse: string = event.currentTarget["courseName"].value;
-        const newList = [...courses, newCourse]
-        setCourses(newList)
-        props.passList(newList);
+        const newCourse: string = event.currentTarget["cName"].value;
+        const newlist = [newCourse, ...courses];
+        setCourses(newlist)
+        
+        props.passList(newlist);
     }
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="CourseName">Course Name: </label>
-            <input placeholder="Enter Course Name" type="text" name="cName" id="courseName"/>
+            <input placeholder="Enter Course Name" required type="text" name="cName" id="courseName"/>
             <div>
-            <input type="submit" value="Add Course"/>
+            <button>Add Course</button>
             <ul>              
                 {
-                courses.map((course, index) => <li key={course + index}>{course}</li>)
+                courses.map((course) => <li>{course}</li>)
                 }
             </ul>
             </div>

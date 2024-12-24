@@ -4,4 +4,5 @@ export interface IStudent {
     id: number,
     coursesList: string[],
     graduated: boolean;
+
 }

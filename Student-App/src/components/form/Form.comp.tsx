@@ -2,12 +2,15 @@ import { useState } from "react";
 import "./Form.css";
 import { IStudent } from "../../types/student";
 import AddCourses from '../add-courses-list/Add-courses-list.tsx';
+import validateStudent from "../../utils/validaition.ts";
 interface IProps {
     passStudent: (student: IStudent) => void
 }
 const Form = (props: IProps) =>{
     const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: []};
     const [student, setStudent] = useState<IStudent>(INTIAL_STUDENT);
+    const [errors, setErrors] = useState<string[]>([]);
+
 
     const handleChange = (filed: string, value: any)  => {
         setStudent({...student, [filed]: value})
@@ -17,8 +20,14 @@ const Form = (props: IProps) =>{
     }
     const handleSubmitting = () => {
         const newStudent = {...student, id: Date.now()}
-        props.passStudent(newStudent);
-        clearinputs();
+        const errorsArray = validateStudent(newStudent);
+        if(errorsArray.length == 0) {
+            props.passStudent(newStudent);
+            clearinputs();
+        }
+        else {
+            setErrors(errorsArray);
+        }
     } 
     const clearinputs = () => {
         setStudent(INTIAL_STUDENT);
@@ -56,6 +65,16 @@ const Form = (props: IProps) =>{
                 />
             </div>
             <AddCourses passList={addCourses}/>
+            {
+                errors.length > 0 ? 
+                <div className="errors">
+                    <h4>You have The Following Errors</h4>
+                    {
+                        errors.map (error => <p key={error}>{error}</p>)
+                    }
+                </div>
+                : null
+            }
             <button onClick={handleSubmitting}>Add Student</button>
             <button onClick={clearinputs}>Reset</button>
         </div>

@@ -39,3 +39,7 @@
 .container ul {
     padding: 0;
 }
+
+.container .errors p {
+    color: red;
+}
