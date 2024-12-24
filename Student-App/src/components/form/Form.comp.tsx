@@ -26,6 +26,7 @@ const Form = (props: IProps) =>{
             clearinputs();
         }
         else {
+            setErrors([]);
             setErrors(errorsArray);
         }
     } 
@@ -66,7 +67,7 @@ const Form = (props: IProps) =>{
             </div>
             <AddCourses passList={addCourses}/>
             {
-                errors.length > 0 ? 
+                Boolean(errors.length) ? 
                 <div className="errors">
                     <h4>You have The Following Errors</h4>
                     {
