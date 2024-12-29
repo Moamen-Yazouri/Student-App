@@ -1,45 +1,79 @@
 .container{
     background-color: #eee;
     height: auto;
-    width: fit-content;
-    padding: 30px 20px;
-    margin: 20px auto;
-    border: 1px solid black;
+    width: 100%;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
 }
-.container input {
+.container .form {
+    box-shadow: 5px 0px 3px -2px #666;
+    transition: height 0.2s ease-in;
+    width: 100%;
+    border-radius: 10px;
+}
+.container.close .form {
+    max-height: 30px;
+    overflow: hidden;
+}
+.container.open .form {
+    max-height: 100%;
+    overflow: hidden;
+}
+.container .form input {
     margin-bottom: 20px;
     padding: 5px;
     border: 1px solid #777;
 
 }
-.container div label {
-    color: brown;
+.container .form div label {
+    color: #3E5879;
     font-size: 18px;
     font-weight: 900;
 }
-.container div:nth-child(3) input {
+.container .form div:nth-child(3) input {
     margin-bottom: 0;
 }
-.container > button {
+.container .form  button {
     display: inline;
     margin-top: 20px;
-    background-color: rgb(150, 47, 47);
+    background-color: #3E5879;
     color: white;
     padding: 10px;
     cursor: pointer;
-    border: 1px solid #777;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px #262857;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
-.container > button:hover {
-    opacity: 0.9;
+.container .form  button:hover {
+    box-shadow: none;
 }
-.container ul {
+.container .form ul {
     padding: 0;
+    background-color: #BCCCDC;
 }
 
-.container .errors p {
+.container .form .errors p {
     color: red;
+}
+.form-btn {
+    margin-top: 0 !important;
+    width: 100%;
+    height: 30px;
+    padding: 0 !important;
+    margin-bottom: 20px;
+    background-color: #213555 !important;
+    border: none;
+    color: #fff !important;
+    box-shadow: 1px 1px 1px 1px #262857;
+    font-size: 15px;
+    font-weight: 700;
+}
+.form-btn:hover {
+    box-shadow: none;
 }

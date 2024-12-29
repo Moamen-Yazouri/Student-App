@@ -10,6 +10,7 @@ const Form = (props: IProps) =>{
     const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: []};
     const [student, setStudent] = useState<IStudent>(INTIAL_STUDENT);
     const [errors, setErrors] = useState<string[]>([]);
+    const [isOpen, setOpen] = useState<boolean>(false);
 
 
     const handleChange = (filed: string, value: any)  => {
@@ -34,7 +35,13 @@ const Form = (props: IProps) =>{
         setStudent(INTIAL_STUDENT);
     }
     return (
-        <div className="container">
+    
+        <div className={`container ${isOpen ? 'open' : 'close'}`}>
+            <div className="form">
+            <button className={"form-btn"} onClick={() => setOpen(!isOpen)}>
+                {isOpen ? <span> &and; Close</span> : <span>&or; Open </span>}
+                Add Form
+            </button>
             <div>
                 <label htmlFor="name">Student Name: </label>
                 <input
@@ -65,20 +72,22 @@ const Form = (props: IProps) =>{
                 onChange={e => handleChange("graduated", e.target.checked)}
                 />
             </div>
-            <AddCourses passList={addCourses}/>
+            <AddCourses value={student.coursesList} passList={addCourses}/>
             {
-                Boolean(errors.length) ? 
+                Boolean(errors.length) && (
                 <div className="errors">
                     <h4>You have The Following Errors</h4>
                     {
                         errors.map (error => <p key={error}>{error}</p>)
                     }
                 </div>
-                : null
-            }
+                )
+            }    
             <button onClick={handleSubmitting}>Add Student</button>
             <button onClick={clearinputs}>Reset</button>
+            </div>
         </div>
+        
     )
 }
 export default Form;

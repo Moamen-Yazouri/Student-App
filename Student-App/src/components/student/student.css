@@ -1,33 +1,46 @@
 .student-wrapper {
-    background-color: #efefef;
-    margin-bottom: 20px;
-    width: 100%;
-    padding-top: 10px;
+    background-color: #3E5879;
+    padding: 10px;
+    margin: 0 auto 40px;
+    width: 500px;
+    box-shadow: 2px 1px 1px 3px #262857;
+    border-radius: 20px;
+}
+.student-wrapper:first-child {
+    margin-top: 40px;
 }
 .student-wrapper h1 {
-    margin: 20px 0;
+    margin: 15px 0;
     font-size: 40px;
     padding: 0;
-    color: cadetblue;
+    color: #F8FAFC;
 }
 .student-wrapper p {
-    margin: 20px 0;
-    font-weight: bold;
+    margin: 15px 0;
+    font-weight: 500;
     font-size: 20px;
+    color: #f3f0ed;
+    line-height: 1.6;
 }
 .student-wrapper button {
-    background-color: cadetblue;
+    background-color: #496181;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #777;
-    color: white;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #262857;
+    color: #FFF;
+    cursor: pointer;
     text-align: center;
     font-size: 15px;
     font-weight: bold;
+    transition: 0.3s;
+}
+.student-wrapper button:hover {
+    box-shadow: none;
 }
 .student-wrapper button:last-of-type {
-    width: 50px;
+    width: 60px;
     border-radius: 20px;
 }
 .student-wrapper > button {

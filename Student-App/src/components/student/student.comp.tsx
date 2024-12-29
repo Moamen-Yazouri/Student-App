@@ -34,7 +34,6 @@ const Student = (props :Iprops) => {
             <button onClick= {resetAbsent}>Reset</button>
             <p>{absent}</p>
             <CoursesList list= {props.coursesList}/>
-            <hr />
         </div>
     )
 } 

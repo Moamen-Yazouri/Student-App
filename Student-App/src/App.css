@@ -1,9 +1,29 @@
 #root {
   width: 800px;
+  padding: 20px 10px;
   margin: auto;
   text-align: center;
+  border: 5px solid #3E5879;
+  background-color: #BCCCDC;
 }
-
+.hide, .show {
+  cursor: pointer;
+  background-color: #3E5879;
+  box-shadow: 1px 1px 1px 1px #262857;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+.hide:hover, .show:hover {
+  box-shadow: none;
+}
+h2 {
+  text-align: left;
+  margin-left: 20px;
+  color: #777;
+  font-size: 16px;
+}
 
 
 

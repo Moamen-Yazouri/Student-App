@@ -2,7 +2,6 @@ import "./courses-list.css"
 interface Iprops {
     list: string[];
 }
-
 const CoursesList = (props: Iprops) => {
     return (
         <ul>

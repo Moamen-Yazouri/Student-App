@@ -1,25 +1,36 @@
 form {
-    background-color: white;
+    background-color: #BCCCDC;
     padding: 10px 15px;
     margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    width: 600px;
+    margin: 0 auto;
+    border-radius: 20px;
 }
 form #courseName {
     margin: 0;
     margin-left: 10px;
 }
 form label {
-    color: brown;
+    color: #3E5879;
     font-weight: 900;
 }
 form div {
     width: 100%;
     margin-top: 10px;
 }
-form input[type="submit"] {
+form  .add-course {
     padding: 5px 10px;
     cursor: pointer;
-}   
+    background-color: #3E5879 !important;
+    box-shadow: 1px 1px 1px 1px #262857;
+    border: none !important;
+    border-radius: 10px !important;
+} 
+form  .add-course:hover {
+    box-shadow: none;
+    opacity: 1 !important;
+}  
