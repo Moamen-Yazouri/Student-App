@@ -7,7 +7,7 @@ interface IProps {
     passStudent: (student: IStudent) => void
 }
 const Form = (props: IProps) =>{
-    const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: []};
+    const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: [], abssents: 0};
     const [student, setStudent] = useState<IStudent>(INTIAL_STUDENT);
     const [errors, setErrors] = useState<string[]>([]);
     const [isOpen, setOpen] = useState<boolean>(false);

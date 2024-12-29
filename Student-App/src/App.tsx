@@ -3,8 +3,7 @@ import './App.css'
 import Student from './components/student/student.comp'
 import Form from './components/form/Form.comp'
 import { IStudent } from './types/student'
-const INTIAL_LIST : IStudent[] = [];
-const studentsList: IStudent[] = [
+const INTIAL_LIST: IStudent[] = [
   {
     name: "Moamen",
     age: 20,
@@ -42,35 +41,41 @@ const studentsList: IStudent[] = [
 function App() {
   const [students, setStudents] = useState<IStudent[]>([]);
   const [totalAbsent, setTotalAbsent] = useState(0);
-  
+  const storeChangedData = (newData: IStudent[]) => {
+    localStorage.setItem("students-list", JSON.stringify(newData));
+  }
   useEffect(() => {
     const list: IStudent[] = JSON.parse(localStorage.getItem("students-list") || JSON.stringify(INTIAL_LIST));
     setStudents(list);
     const totalAbssents: number = list.reduce((prev, curr) => curr.abssents + prev , 0);
     setTotalAbsent(totalAbssents);
-}, [])
-const storeChangedData = (newData: IStudent[]) => {
-  localStorage.setItem("students-list", JSON.stringify(newData) || "[]");
-}
+  }, [])
+
+  useEffect(() => {
+    if(students.length > 0) {
+      storeChangedData(students)
+    }
+  }, [students])
+
   const showStudents = () => {
-    setStudents(studentsList);
-    storeChangedData(studentsList);
+    setStudents(JSON.parse(localStorage.getItem("students-list") || JSON.stringify(INTIAL_LIST)));
   }
   const hideStudents = () => {
     setStudents([]);
+  }
+  const deleteStudent = (id: number) => {
+    const newList = students.filter(std => std.id !== id);
+    setStudents(newList);
   }
 
   const handleTotal = (change: number, id: number) => {
     const newList: IStudent[] = students.map(std => std.id == id ? {...std, abssents: (std.abssents + change)} : std);
     setStudents(newList) 
     setTotalAbsent(totalAbsent + change)
-    storeChangedData(newList);
   }
 
   const addNewStudent = (std: IStudent) => {
-    studentsList.unshift(std);
-    setStudents([...studentsList])
-    storeChangedData([...studentsList]);
+    setStudents([std,...students])
   }
   return (
     <>
@@ -89,6 +94,7 @@ const storeChangedData = (newData: IStudent[]) => {
             graduated={std.graduated}
             coursesList={std.coursesList} 
             sentAbsent={handleTotal}
+            handleDelete={deleteStudent}
           />
         ))
       }

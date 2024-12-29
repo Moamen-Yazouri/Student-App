@@ -46,4 +46,11 @@
 .student-wrapper > button {
     margin-right: 10px;
 }
+.delete {
+    cursor:  pointer;
+    transition: 0.3s;
+}
+.delete:hover {
+    transform: scale(1.1);
+}
 

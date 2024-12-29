@@ -11,5 +11,5 @@ ul li {
     color: #fff;
     padding: 10px;
     border-radius: 20px;
-    margin: 20px 0; 
+    margin: 20px 0 !important; 
 }

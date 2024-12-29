@@ -33,4 +33,24 @@ form  .add-course {
 form  .add-course:hover {
     box-shadow: none;
     opacity: 1 !important;
-}  
+}
+ul {
+    margin: 0 auto;
+    width: 400px;
+}
+.form-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.delete-course {
+    align-self: flex-end;
+    position: absolute;
+    left: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.delete-course:hover {
+    transform: scale(1.1);
+}

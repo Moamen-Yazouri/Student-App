@@ -4,5 +4,5 @@ export interface IStudent {
     id: number,
     coursesList: string[],
     graduated: boolean;
-    abssents: number
+    abssents: number;
 }
