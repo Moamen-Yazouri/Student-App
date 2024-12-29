@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import Student from './components/student/student.comp'
 import Form from './components/form/Form.comp'
@@ -10,50 +10,67 @@ const studentsList: IStudent[] = [
     age: 20,
     id: 120220426,
     coursesList: ["React", "Angular"],
-    graduated: true
+    graduated: true,
+    abssents: 0
   },
   {
     name: "Khaled",
     age: 21,
     id: 120220427,
     coursesList: ["React", "Angular", "Vue"],
-    graduated: false
+    graduated: false,
+    abssents: 0
   },
   {
     name: "Fawzy",
     age: 22,
     id: 120220428,
     coursesList: ["React", "Angular", "Next"],
-    graduated: true
+    graduated: true,
+    abssents: 0,
   },
   {
     name: "Ahmed",
     age: 23,
     id: 120220429,
     coursesList: ["React",  "JS"],
-    graduated: true
+    graduated: true,
+    abssents: 0,
   }
 ]; 
 
 function App() {
-  const [students, setStudents] = useState<IStudent[]>(INTIAL_LIST);
+  const [students, setStudents] = useState<IStudent[]>([]);
   const [totalAbsent, setTotalAbsent] = useState(0);
-
+  
+  useEffect(() => {
+    const list: IStudent[] = JSON.parse(localStorage.getItem("students-list") || JSON.stringify(INTIAL_LIST));
+    setStudents(list);
+    const totalAbssents: number = list.reduce((prev, curr) => curr.abssents + prev , 0);
+    setTotalAbsent(totalAbssents);
+}, [])
+const storeChangedData = (newData: IStudent[]) => {
+  localStorage.setItem("students-list", JSON.stringify(newData) || "[]");
+}
   const showStudents = () => {
     setStudents(studentsList);
+    storeChangedData(studentsList);
   }
-  
   const hideStudents = () => {
     setStudents([]);
   }
 
-  const handleTotal = (change: number) => {
+  const handleTotal = (change: number, id: number) => {
+    const newList: IStudent[] = students.map(std => std.id == id ? {...std, abssents: (std.abssents + change)} : std);
+    setStudents(newList) 
     setTotalAbsent(totalAbsent + change)
+    storeChangedData(newList);
   }
 
   const addNewStudent = (std: IStudent) => {
     studentsList.unshift(std);
     setStudents([...studentsList])
+    storeChangedData([...studentsList]);
   }
   return (
     <>
@@ -65,6 +82,7 @@ function App() {
         students.map( std => (
           <Student
             key={std.id} 
+            abssents={std.abssents}
             name= {std.name}
             age={std.age}
             id={std.id}

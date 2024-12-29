@@ -23,7 +23,7 @@ const AddCourses = (props: IProp) => {
             <button className="add-course">Add Course</button>
             <ul>              
                 {
-                courses.map((course) => <li>{course}</li>)
+                courses.map((course, index) => <li key={index}>{course}</li>)
                 }
             </ul>
             </div>

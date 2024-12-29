@@ -4,20 +4,20 @@ import CoursesList from '../courses-list/courses-list.comp';
 import './student.css';
 
 const Student = (props :Iprops) => {
-    const [absent, setAbsent] = useState(0);
+    const [absent, setAbsent] = useState(props.abssents);
     const addAbsent = () => {
         setAbsent(absent + 1);
-        props.sentAbsent(+1)
+        props.sentAbsent(+1, props.id)
     }
     const removeAbsent = () => {
         if(absent > 0)
         setAbsent(absent - 1);
-        props.sentAbsent(-1)
+        props.sentAbsent(-1, props.id)
     }
     const resetAbsent = () => {
         if(absent > 0)
         setAbsent(0);
-        props.sentAbsent(-absent)
+        props.sentAbsent(-absent, props.id)
     }
     return (
         <div className="student-wrapper">
@@ -39,7 +39,7 @@ const Student = (props :Iprops) => {
 } 
 
 interface Iprops extends IStudent {
-    sentAbsent: (change: number) => void;
+    sentAbsent: (change: number, id: number) => void;
 };
 
 
