@@ -3,41 +3,7 @@ import './App.css'
 import Student from './components/student/student.comp'
 import Form from './components/form/Form.comp'
 import { IStudent } from './types/student'
-const INTIAL_LIST: IStudent[] = [
-  {
-    name: "Moamen",
-    age: 20,
-    id: 120220426,
-    coursesList: ["React", "Angular"],
-    graduated: true,
-    abssents: 0
-  },
-  {
-    name: "Khaled",
-    age: 21,
-    id: 120220427,
-    coursesList: ["React", "Angular", "Vue"],
-    graduated: false,
-    abssents: 0
-  },
-  {
-    name: "Fawzy",
-    age: 22,
-    id: 120220428,
-    coursesList: ["React", "Angular", "Next"],
-    graduated: true,
-    abssents: 0,
-  },
-  {
-    name: "Ahmed",
-    age: 23,
-    id: 120220429,
-    coursesList: ["React",  "JS"],
-    graduated: true,
-    abssents: 0,
-  }
-]; 
-
+import { STUDENTS_DATA } from './assets/STUDENTS_DATA';
 function App() {
   const [students, setStudents] = useState<IStudent[]>([]);
   const [totalAbsent, setTotalAbsent] = useState(0);
@@ -45,7 +11,7 @@ function App() {
     localStorage.setItem("students-list", JSON.stringify(newData));
   }
   useEffect(() => {
-    const list: IStudent[] = JSON.parse(localStorage.getItem("students-list") || JSON.stringify(INTIAL_LIST));
+    const list: IStudent[] = JSON.parse(localStorage.getItem("students-list") || JSON.stringify(STUDENTS_DATA));
     setStudents(list);
     const totalAbssents: number = list.reduce((prev, curr) => curr.abssents + prev , 0);
     setTotalAbsent(totalAbssents);
@@ -58,7 +24,7 @@ function App() {
   }, [students])
 
   const showStudents = () => {
-    setStudents(JSON.parse(localStorage.getItem("students-list") || JSON.stringify(INTIAL_LIST)));
+    setStudents(JSON.parse(localStorage.getItem("students-list") || JSON.stringify(STUDENTS_DATA)));
   }
   const hideStudents = () => {
     setStudents([]);
