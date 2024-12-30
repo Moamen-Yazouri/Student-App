@@ -8,6 +8,7 @@ const Student = (props :Iprops) => {
     const [absent, setAbsent] = useState(props.abssents);
     const [absentColor, setAbsentColor] = useState<Object>({});
     useEffect(() => {
+        
         if(absent >= 5 && absent < 10) {
             setAbsentColor({color: "#EB5B00"});
         }

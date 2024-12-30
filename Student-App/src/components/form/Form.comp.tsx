@@ -25,6 +25,7 @@ const Form = (props: IProps) =>{
         if(errorsArray.length == 0) {
             props.passStudent(newStudent);
             clearinputs();
+            setErrors([]);
         }
         else {
             setErrors([]);

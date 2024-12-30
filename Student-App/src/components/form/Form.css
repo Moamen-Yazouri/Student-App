@@ -32,7 +32,7 @@
 .container .form div label {
     color: #3E5879;
     font-size: 18px;
-    font-weight: 900;
+    font-weight: bold;
 }
 .container .form div:nth-child(3) input {
     margin-bottom: 0;

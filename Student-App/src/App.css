@@ -6,6 +6,9 @@
   border: 5px solid #3E5879;
   background-color: #BCCCDC;
 }
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 .hide, .show {
   cursor: pointer;
   background-color: #3E5879;
