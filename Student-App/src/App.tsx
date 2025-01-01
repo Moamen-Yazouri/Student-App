@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './App.css'
 import Student from './components/student/student.comp'
 import Form from './components/form/Form.comp'
@@ -42,9 +42,11 @@ function App() {
     setTotalAbsent(totalAbsent + change)
   }
 
-  const addNewStudent = (std: IStudent) => {
-    setStudents([std,...students])
-  }
+  const addNewStudent = useCallback(() => {
+    return  (std: IStudent) => {
+      setStudents([std,...students])
+    }
+  }, [students]);
   return (
     <>
       <Form passStudent={addNewStudent}/>
