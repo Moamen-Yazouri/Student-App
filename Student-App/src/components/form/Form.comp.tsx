@@ -2,39 +2,21 @@ import { useState } from "react";
 import "./Form.css";
 import { IStudent } from "../../types/student";
 import AddCourses from '../add-courses-list/Add-courses-list.tsx';
-import validateStudent from "../../utils/validaition.ts";
+import useForm from "../../hooks/useForm.ts";
 interface IProps {
     passStudent: (student: IStudent) => void
 }
 const Form = (props: IProps) =>{
     const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: [], abssents: 0};
-    const [student, setStudent] = useState<IStudent>(INTIAL_STUDENT);
-    const [errors, setErrors] = useState<string[]>([]);
     const [isOpen, setOpen] = useState<boolean>(false);
-
-
-    const handleChange = (filed: string, value: any)  => {
-        setStudent({...student, [filed]: value})
-    }
-    const addCourses = (courses: string[]) => {
-        setStudent({...student, coursesList: courses})
-    }
-    const handleSubmitting = () => {
-        const newStudent = {...student, id: Date.now()}
-        const errorsArray = validateStudent(newStudent);
-        if(errorsArray.length == 0) {
-            props.passStudent(newStudent);
-            clearinputs();
-            setErrors([]);
-        }
-        else {
-            setErrors([]);
-            setErrors(errorsArray);
-        }
-    } 
-    const clearinputs = () => {
-        setStudent(INTIAL_STUDENT);
-    }
+    const {
+        handleChange,
+        addCourses,
+        handleSubmitting,
+        clearinputs,
+        errors,
+        student
+    } = useForm({passStudent: props.passStudent}, INTIAL_STUDENT);
     return (
     
         <div className={`container ${isOpen ? 'open' : 'close'}`}>

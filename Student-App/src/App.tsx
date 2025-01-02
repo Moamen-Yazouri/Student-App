@@ -4,25 +4,18 @@ import Student from './components/student/student.comp'
 import Form from './components/form/Form.comp'
 import { IStudent } from './types/student'
 import { STUDENTS_DATA } from './assets/STUDENTS_DATA';
+import useLocalStorage from './hooks/useLocalStorage';
 function App() {
   const [students, setStudents] = useState<IStudent[]>(STUDENTS_DATA);
   const [totalAbsent, setTotalAbsent] = useState(0);
+  const {storedData} = useLocalStorage(students, "students-list");
 
   useEffect(() => {
-    const list: IStudent[] = JSON.parse(localStorage.getItem("students-list") || JSON.stringify(STUDENTS_DATA));
-    console.log("Hello from app")
-    const totalAbssents: number = list.reduce((prev, curr) => curr.abssents + prev , 0);
-    setStudents(list);
+    const stdList: IStudent[] = storedData || [];
+    const totalAbssents: number = stdList.reduce((prev, curr) => curr.abssents + prev , 0);
     setTotalAbsent(totalAbssents);
-  }, [])
-
-  useEffect(() => {
-      storeChangedData(students);
-  }, [students]);
-
-  const storeChangedData = (newData: IStudent[]) => {
-    localStorage.setItem("students-list", JSON.stringify(newData));
-  }
+    setStudents(storedData || STUDENTS_DATA);
+  }, [storedData]);
 
   const showStudents = () => {
     setStudents(JSON.parse(localStorage.getItem("students-list") || JSON.stringify(STUDENTS_DATA)));
@@ -42,11 +35,9 @@ function App() {
     setTotalAbsent(totalAbsent + change)
   }
 
-  const addNewStudent = useCallback(() => {
-    return  (std: IStudent) => {
+  const addNewStudent =  (std: IStudent) => {
       setStudents([std,...students])
     }
-  }, [students]);
   return (
     <>
       <Form passStudent={addNewStudent}/>
