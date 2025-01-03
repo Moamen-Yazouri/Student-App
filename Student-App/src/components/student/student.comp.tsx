@@ -41,7 +41,7 @@ const Student = (props :Iprops) => {
                 <br />
                 ID: {props.id}
                 <br/>
-                isGraduated: {props.graduated ? "Yes" : "No"}
+                isGraduated: <span className={`${props.graduated ? "yes" : "no"}  `}>{props.graduated ? "Yes" : "No"}</span>
             </p>
             <button onClick= {addAbsent}>+</button>
             <button onClick= {removeAbsent}>-</button>

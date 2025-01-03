@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react"
-import retrieveData from "../utils/getFromLocalStorage";
-import storeData from "../utils/storeOnLocalStorage";
-
 const useLocalStorage = (state: any, storageKey: string) => {
     const[storedData, setStoredData] = useState<any>();
 
     useEffect(()=>{
-        const strData = retrieveData(storageKey);
-        setStoredData(strData);
+        const strData = localStorage.getItem(storageKey);
+        try{
+            if(strData) {
+                setStoredData(JSON.parse(strData));
+            }
+            else {
+                setStoredData(null)
+            }
+        }
+        catch {
+            setStoredData(strData)
+        }
     }, []);
 
     useEffect(() => {
-        storeData(state, storageKey);
+        if(typeof state === 'object') {
+            localStorage.setItem(storageKey, JSON.stringify(state));
+        }
+        else {
+            localStorage.setItem(storageKey, state.toString());
+        }
     }, [state]);
 
     return {storedData};
