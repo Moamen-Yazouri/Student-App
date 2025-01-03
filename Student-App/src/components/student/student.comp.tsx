@@ -6,9 +6,9 @@ import { Trash } from '@phosphor-icons/react';
 
 const Student = (props :Iprops) => {
     const [absent, setAbsent] = useState(props.abssents);
+
     const [absentColor, setAbsentColor] = useState<Object>({});
     useEffect(() => {
-        
         if(absent >= 5 && absent < 10) {
             setAbsentColor({color: "#EB5B00"});
         }
@@ -19,20 +19,24 @@ const Student = (props :Iprops) => {
             setAbsentColor({});
         }
     }, [absent])
+
     const addAbsent = () => {
         setAbsent(absent + 1);
         props.sentAbsent(+1, props.id)
     }
+
     const removeAbsent = () => {
         if(absent > 0)
         setAbsent(absent - 1);
         props.sentAbsent(-1, props.id)
     }
+
     const resetAbsent = () => {
         if(absent > 0)
         setAbsent(0);
         props.sentAbsent(-absent, props.id)
     }
+
     return (
         <div className="student-wrapper">
             <h1>{props.name}</h1>
