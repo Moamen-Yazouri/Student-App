@@ -9,14 +9,7 @@ interface IProps {
 const Form = (props: IProps) =>{
     const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: [], abssents: 0};
     const [isOpen, setOpen] = useState<boolean>(false);
-    const {
-        handleChange,
-        addCourses,
-        handleSubmitting,
-        clearinputs,
-        errors,
-        student
-    } = useForm({passStudent: props.passStudent}, INTIAL_STUDENT);
+    const form = useForm(props.passStudent, INTIAL_STUDENT);
     return (
     
         <div className={`container ${isOpen ? 'open' : 'close'}`}>
@@ -29,45 +22,45 @@ const Form = (props: IProps) =>{
                 <label htmlFor="name">Student Name: </label>
                 <input
                 type="text"
-                value={student.name}
+                value={form.student.name}
                 id="name"
                 placeholder="Enter The name"
-                onChange={e => handleChange("name", e.target.value)}
+                onChange={e => form.handleChange("name", e.target.value)}
                 />
             </div>
             <div>
                 <label htmlFor="age">Student age: </label>
                 <input 
                 type="number"
-                value={student.age}
+                value={form.student.age}
                 id="age"
                 min={18} 
                 max={40}
-                onChange={e => handleChange("age", Number(e.target.value))}
+                onChange={e => form.handleChange("age", Number(e.target.value))}
                 />
             </div>
             <div>
                 <label htmlFor="graduated">Is Graduated: </label>
                 <input
                 type="checkbox"
-                checked={student.graduated}
+                checked={form.student.graduated}
                 id="graduated"
-                onChange={e => handleChange("graduated", e.target.checked)}
+                onChange={e => form.handleChange("graduated", e.target.checked)}
                 />
             </div>
-            <AddCourses value={student.coursesList} passList={addCourses}/>
+            <AddCourses value={form.student.coursesList} passList={form.addCourses}/>
             {
-                Boolean(errors.length) && (
+                Boolean(form.errors.length) && (
                 <div className="errors">
                     <h4>You have The Following Errors</h4>
                     {
-                        errors.map (error => <p key={error}>{error}</p>)
+                        form.errors.map (error => <p key={error}>{error}</p>)
                     }
                 </div>
                 )
             }    
-            <button onClick={handleSubmitting}>Add Student</button>
-            <button onClick={clearinputs}>Reset</button>
+            <button onClick={form.handleSubmitting}>Add Student</button>
+            <button onClick={form.clearinputs}>Reset</button>
             </div>
         </div>
         

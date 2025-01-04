@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { IStudent } from '../../types/student';
 import CoursesList from '../courses-list/courses-list.comp';
 import './student.css';
 import { Trash } from '@phosphor-icons/react';
+interface IProps extends IStudent {
+    sentAbsent: (change: number, id: number) => void;
+    handleDelete: (id: number) => void;
+};
 
-const Student = (props :Iprops) => {
+const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
     const [absent, setAbsent] = useState(props.abssents);
 
     const [absentColor, setAbsentColor] = useState<Object>({});
@@ -38,7 +42,7 @@ const Student = (props :Iprops) => {
     }
 
     return (
-        <div className="student-wrapper">
+        <div ref={ref} className="student-wrapper">
             <h1>{props.name}</h1>
             <p>
                 The age: {props.age}
@@ -54,13 +58,9 @@ const Student = (props :Iprops) => {
             <Trash className='delete' size={32} weight="bold" color='red' onClick={() => props.handleDelete(props.id)}/>
             <CoursesList list= {props.coursesList}/>
         </div>
+        )}
     )
-} 
 
-interface Iprops extends IStudent {
-    sentAbsent: (change: number, id: number) => void;
-    handleDelete: (id: number) => void;
-};
 
 
 

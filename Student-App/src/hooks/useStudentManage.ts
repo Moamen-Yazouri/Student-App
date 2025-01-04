@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IStudent } from "../types/student";
 import useLocalStorage from "./useLocalStorage";
 import { STUDENTS_DATA } from "../assets/STUDENTS_DATA";
@@ -7,6 +7,24 @@ const useStudentManage = () => {
     const [students, setStudents] = useState<IStudent[]>(STUDENTS_DATA);
     const [totalAbsent, setTotalAbsent] = useState(0);
     const {storedData} = useLocalStorage(students, "students-list");
+    const stdRef = useRef<HTMLDivElement>(null);
+    const[date, setDate] = useState('');
+    const timeref = useRef<number>();
+
+    useEffect(() => {
+        timeref.current = setInterval(() => {
+        setDate(new Date().toLocaleTimeString());
+    }, 1000)
+
+    }, [])
+
+    const stopTime = () => {
+        clearInterval(timeref.current);
+    }
+
+    const scrollLast = () => {
+        stdRef.current?.scrollIntoView({behavior: 'smooth'});
+    }
 
     useEffect(() => {
         const stdList: IStudent[] = storedData || [];
@@ -37,13 +55,17 @@ const useStudentManage = () => {
         setStudents([std,...students])
     }
     return {
+        totalAbsent,
+        students,
+        stdRef,
+        date,
+        stopTime,
         showStudents,
         hideStudents,
         deleteStudent,
         handleTotal,
         addNewStudent,
-        totalAbsent,
-        students
+        scrollLast
     }
 }
 export default useStudentManage;
