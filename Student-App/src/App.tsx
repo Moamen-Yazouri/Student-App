@@ -1,35 +1,28 @@
+import { useState } from 'react';
 import './App.css'
-import Student from './components/student/student.comp'
-import Form from './components/form/Form.comp'
-import useStudentManage from './hooks/useStudentManage';
-import Time from './components/time/time';
+import Main from './screens/Main/Main.screens';
+import About from './screens/About/About.screens';
 function App() {
-
-  const studentsManager = useStudentManage();
-
+  const [screen, setSecreen] = useState('Main');
   return (
     <>
-      <Time date={studentsManager.date} stopTime={studentsManager.stopTime}/>
-      <Form passStudent={studentsManager.addNewStudent}/>
-      <button className= "show" onClick= {studentsManager.showStudents} >Show Students</button>
-      <button className= "hide" onClick= {studentsManager.hideStudents} >Hide Students</button>
-      <button className= "hide" onClick={studentsManager.scrollLast} >Scroll Students</button>
-      <h2>Total Absents : {studentsManager.totalAbsent}</h2>
+      <nav>
+        <button onClick={() => setSecreen('Main')}>Home</button>
+        <button onClick={() => setSecreen('About')}>About</button>
+      </nav>
       {
-        studentsManager.students.map( (std, index, arr) => (
-          <Student
-            ref= {index == arr.length - 1 ? studentsManager.stdRef : null}
-            key={std.id} 
-            abssents={std.abssents}
-            name= {std.name}
-            age={std.age}
-            id={std.id}
-            graduated={std.graduated}
-            coursesList={std.coursesList} 
-            sentAbsent={studentsManager.handleTotal}
-            handleDelete={studentsManager.deleteStudent}
-          />
-        ))
+        screen === "Main" ?
+          <Main/>
+        : 
+        screen === 'About' ?
+          <About/>
+          : 
+          <>
+            <h2>Cannot Found The Page 404</h2>
+            <p>
+              We Cannot Find This Page.
+            </p>
+          </>
       }
     </>
   )

@@ -9,7 +9,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
-.hide, .show {
+.hide, .show, button {
   cursor: pointer;
   background-color: #3E5879;
   box-shadow: 1px 1px 1px 1px #262857;
@@ -18,7 +18,20 @@ body {
   border-radius: 15px;
   transition: 0.3s;
 }
-.hide:hover, .show:hover {
+nav {
+  border-top: 3px solid #262857;
+  border-bottom: 3px solid #262857;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+nav button {
+  margin-right: 20px;
+  width: 60px;
+  height: 30px;
+  border-radius: 0;
+}
+.hide:hover, .show:hover, button:hover {
   box-shadow: none;
 }
 h2 {
