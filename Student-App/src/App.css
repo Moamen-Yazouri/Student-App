@@ -9,7 +9,7 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
-.hide, .show, button {
+.hide, .show, a {
   cursor: pointer;
   background-color: #3E5879;
   box-shadow: 1px 1px 1px 1px #262857;
@@ -17,6 +17,7 @@ body {
   border: none;
   border-radius: 15px;
   transition: 0.3s;
+  text-decoration: none;
 }
 nav {
   border-top: 3px solid #262857;
@@ -25,13 +26,16 @@ nav {
   display: flex;
   align-items: center;
 }
-nav button {
-  margin-right: 20px;
+nav a {
+  margin-right: 10px;
   width: 60px;
-  height: 30px;
+  height: 100%;
   border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hide:hover, .show:hover, button:hover {
+.hide:hover, .show:hover,:hover {
   box-shadow: none;
 }
 h2 {

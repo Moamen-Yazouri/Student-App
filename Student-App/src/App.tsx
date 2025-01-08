@@ -3,21 +3,21 @@ import './App.css'
 import Main from './screens/Main/Main.screens';
 import About from './screens/About/About.screens';
 function App() {
-  const [screen, setSecreen] = useState('Main');
+  const screen = window.location.pathname;
   return (
     <>
       <nav>
-        <button onClick={() => setSecreen('Main')}>Home</button>
-        <button onClick={() => setSecreen('About')}>About</button>
+        <a href='/'>Home</a>
+        <a href = '/about'>About</a>
       </nav>
       {
-        screen === "Main" ?
+        screen === "/" ?
           <Main/>
         : 
-        screen === 'About' ?
+        screen === '/about' ?
           <About/>
-          : 
-          <>
+          
+          :<>
             <h2>Cannot Found The Page 404</h2>
             <p>
               We Cannot Find This Page.
