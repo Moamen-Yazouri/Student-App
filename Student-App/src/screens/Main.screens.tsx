@@ -1,7 +1,7 @@
-import Form from "../../components/form/Form.comp";
-import Student from "../../components/student/student.comp";
-import Time from "../../components/time/time";
-import useStudentManage from "../../hooks/useStudentManage";
+import Form from "../components/form/Form.comp";
+import Student from "../components/student/student.comp";
+import Time from "../components/time/time";
+import useStudentManage from "../hooks/useStudentManage";
 
 const Main = () => {
     const studentsManager = useStudentManage();
