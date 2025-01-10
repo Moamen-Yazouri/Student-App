@@ -5,6 +5,7 @@ import useStudentManage from "../hooks/useStudentManage";
 
 const Main = () => {
     const studentsManager = useStudentManage();
+
     return (
         <>
             <Time date={studentsManager.date} stopTime={studentsManager.stopTime}/>
@@ -13,21 +14,31 @@ const Main = () => {
             <button className= "hide" onClick= {studentsManager.hideStudents} >Hide Students</button>
             <button className= "hide" onClick={studentsManager.scrollLast} >Scroll Students</button>
             <h2>Total Absents : {studentsManager.totalAbsent}</h2>
+            <div className="search">
+                <input 
+                type="text"
+                placeholder="Search by name" 
+                onChange={studentsManager.handleSearch} 
+                value={studentsManager.params.get('q') || ''
+                }/>
+            </div>
             {
-                studentsManager.students.map( (std, index, arr) => (
-                <Student
-                    ref= {index == arr.length - 1 ? studentsManager.stdRef : null}
-                    key={std.id} 
-                    abssents={std.abssents}
-                    name= {std.name}
-                    age={std.age}
-                    id={std.id}
-                    graduated={std.graduated}
-                    coursesList={std.coursesList} 
-                    sentAbsent={studentsManager.handleTotal}
-                    handleDelete={studentsManager.deleteStudent}
-                />
-                ))
+                studentsManager.isShown && (
+                    studentsManager.filteredList.map( (std, index, arr) => (
+                    <Student
+                        ref= {index == arr.length - 1 ? studentsManager.stdRef : null}
+                        key={std.id} 
+                        absents={std.absents}
+                        name= {std.name}
+                        age={std.age}
+                        id={std.id}
+                        graduated={std.graduated}
+                        coursesList={std.coursesList} 
+                        sentAbsent={studentsManager.handleTotal}
+                        handleDelete={studentsManager.deleteStudent}
+                    />
+                    ))
+                )
             }
         </>
     )

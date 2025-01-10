@@ -1,5 +1,6 @@
 import './App.css'
 import Main from './screens/Main.screens';
+import StudentDetails from './screens/StudentDetails.screens';
 import About from './screens/About.screens';
 import NotFound from './screens/NotFound.screens';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main/>} />
           <Route path="/about" element={<About/>}/>
+          <Route path="/student/:id" element={<StudentDetails/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </>

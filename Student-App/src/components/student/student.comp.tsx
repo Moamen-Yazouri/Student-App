@@ -3,13 +3,16 @@ import { IStudent } from '../../types/student';
 import CoursesList from '../courses-list/courses-list.comp';
 import './student.css';
 import { Trash } from '@phosphor-icons/react';
+import { Link } from 'react-router';
 interface IProps extends IStudent {
     sentAbsent: (change: number, id: number) => void;
     handleDelete: (id: number) => void;
 };
 
 const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
-    const [absent, setAbsent] = useState(props.abssents);
+    const [absent, setAbsent] = useState(props.absents);
+    
+    
 
     const [absentColor, setAbsentColor] = useState<Object>({});
     useEffect(() => {
@@ -43,7 +46,7 @@ const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
 
     return (
         <div ref={ref} className="student-wrapper">
-            <h1>{props.name}</h1>
+            <h1><Link to ={`/student/${props.id}`} className='std-details'>{props.name}</Link></h1>
             <p>
                 The age: {props.age}
                 <br />
@@ -54,7 +57,7 @@ const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
             <button onClick= {addAbsent}>+</button>
             <button onClick= {removeAbsent}>-</button>
             <button onClick= {resetAbsent}>Reset</button>
-            <p>Abbsents: <span style={absentColor}>{absent}</span></p>
+            <p>Absents: <span style={absentColor}>{absent}</span></p>
             <Trash className='delete' size={32} weight="bold" color='red' onClick={() => props.handleDelete(props.id)}/>
             <CoursesList list= {props.coursesList}/>
         </div>

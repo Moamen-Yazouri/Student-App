@@ -7,7 +7,7 @@ const STUDENTS_DATA: IStudent[] = [
     id: 120220426,
     coursesList: ["React", "Angular"],
     graduated: true,
-    abssents: 0
+    absents: 0
     },
     {
     name: "Khaled",
@@ -15,7 +15,7 @@ const STUDENTS_DATA: IStudent[] = [
     id: 120220427,
     coursesList: ["React", "Angular", "Vue"],
     graduated: false,
-    abssents: 0
+    absents: 0
     },
     {
     name: "Fawzy",
@@ -23,7 +23,7 @@ const STUDENTS_DATA: IStudent[] = [
     id: 120220428,
     coursesList: ["React", "Angular", "Next"],
     graduated: true,
-    abssents: 0,
+    absents: 0,
     },
     {
     name: "Ahmed",
@@ -31,7 +31,7 @@ const STUDENTS_DATA: IStudent[] = [
     id: 120220429,
     coursesList: ["React",  "JS"],
     graduated: true,
-    abssents: 0,
+    absents: 0,
     }
 ]; 
 export {STUDENTS_DATA};

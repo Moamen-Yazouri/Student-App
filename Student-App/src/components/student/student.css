@@ -66,4 +66,14 @@
 .student-wrapper ul {
     margin: 0 auto;
 }
+.student-wrapper .std-details {
+    background-color: #fff;
+    color: #262857;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px;
+}
 
