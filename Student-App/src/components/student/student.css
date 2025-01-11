@@ -1,14 +1,12 @@
 .student-wrapper {
     background-color: #3E5879;
     padding: 10px;
-    margin: 0 auto 40px;
-    width: 500px;
+    flex: 0;
     box-shadow: 2px 1px 1px 3px #262857;
     border-radius: 20px;
+    margin: 0;
 }
-.student-wrapper:first-child {
-    margin-top: 40px;
-}
+
 .student-wrapper h1 {
     margin: 15px 0;
     font-size: 40px;

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Form.css";
 import { IStudent } from "../../types/student";
 import AddCourses from '../add-courses-list/Add-courses-list.tsx';
@@ -8,16 +7,11 @@ interface IProps {
 }
 const Form = (props: IProps) =>{
     const INTIAL_STUDENT = {name: "", age: 0, graduated: false, id: 0, coursesList: [], absents: 0};
-    const [isOpen, setOpen] = useState<boolean>(false);
     const form = useForm(props.passStudent, INTIAL_STUDENT);
     return (
     
-        <div className={`container ${isOpen ? 'open' : 'close'}`}>
+        <div className={"container"}>
             <div className="form">
-            <button className={"form-btn"} onClick={() => setOpen(!isOpen)}>
-                {isOpen ? <span> &and; Close</span> : <span>&or; Open </span>}
-                Add Form
-            </button>
             <div>
                 <label htmlFor="name">Student Name: </label>
                 <input

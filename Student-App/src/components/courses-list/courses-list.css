@@ -4,6 +4,7 @@ ul {
     background-color: #BCCCDC;
     padding: 5px;
     border-radius: 20px;
+    max-width: 100%;
 }
 
 ul li {

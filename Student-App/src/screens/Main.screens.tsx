@@ -1,45 +1,57 @@
 import Form from "../components/form/Form.comp";
 import Student from "../components/student/student.comp";
-import Time from "../components/time/time";
 import useStudentManage from "../hooks/useStudentManage";
-
-const Main = () => {
-    const studentsManager = useStudentManage();
-
+import { IStudent } from "../types/student";
+interface IProps {
+    showStudents: () => void;
+    hideStudents: () => void;
+    scrollLast: () => void;
+    totalAbsent: number;
+    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    params: URLSearchParams;
+    isShown: boolean;
+    filteredList: IStudent[];
+    stdRef: React.RefObject<HTMLDivElement>;
+    handleTotal: (change: number, id: number) => void;
+    deleteStudent: (id: number) => void
+}
+const Main = (props: IProps) => {
     return (
         <>
-            <Time date={studentsManager.date} stopTime={studentsManager.stopTime}/>
-            <Form passStudent={studentsManager.addNewStudent}/>
-            <button className= "show" onClick= {studentsManager.showStudents} >Show Students</button>
-            <button className= "hide" onClick= {studentsManager.hideStudents} >Hide Students</button>
-            <button className= "hide" onClick={studentsManager.scrollLast} >Scroll Students</button>
-            <h2>Total Absents : {studentsManager.totalAbsent}</h2>
+            
+            <button className= "show" onClick= {props.showStudents} >Show Students</button>
+            <button className= "hide" onClick= {props.hideStudents} >Hide Students</button>
+            <button className= "hide" onClick={props.scrollLast} >Scroll Students</button>
+            <h2>Total Absents : {props.totalAbsent}</h2>
             <div className="search">
+                <label>Student Name: </label>
                 <input 
                 type="text"
                 placeholder="Search by name" 
-                onChange={studentsManager.handleSearch} 
-                value={studentsManager.params.get('q') || ''
+                onChange={props.handleSearch} 
+                value={props.params.get('q') || ''
                 }/>
             </div>
-            {
-                studentsManager.isShown && (
-                    studentsManager.filteredList.map( (std, index, arr) => (
-                    <Student
-                        ref= {index == arr.length - 1 ? studentsManager.stdRef : null}
-                        key={std.id} 
-                        absents={std.absents}
-                        name= {std.name}
-                        age={std.age}
-                        id={std.id}
-                        graduated={std.graduated}
-                        coursesList={std.coursesList} 
-                        sentAbsent={studentsManager.handleTotal}
-                        handleDelete={studentsManager.deleteStudent}
-                    />
-                    ))
-                )
-            }
+            <div className="students-container">
+                {
+                    props.isShown && (
+                        props.filteredList.map( (std, index, arr) => (
+                        <Student
+                            ref= {index == arr.length - 1 ? props.stdRef : null}
+                            key={std.id} 
+                            absents={std.absents}
+                            name= {std.name}
+                            age={std.age}
+                            id={std.id}
+                            graduated={std.graduated}
+                            coursesList={std.coursesList} 
+                            sentAbsent={props.handleTotal}
+                            handleDelete={props.deleteStudent}
+                        />
+                        ))
+                    )
+                }
+            </div>
         </>
     )
 }
