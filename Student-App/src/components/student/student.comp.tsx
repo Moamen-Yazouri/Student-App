@@ -6,7 +6,7 @@ import { Trash } from '@phosphor-icons/react';
 import { Link } from 'react-router';
 import Absents from '../Absents.comp.tsx/Absents';
 interface IProps extends IStudent {
-    sentAbsent: (change: number, id: number) => void;
+    sentAbsent: (absent:{change: number, id: number}) => void;
     handleDelete: (id: number) => void;
 };
 
@@ -30,19 +30,19 @@ const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
 
     const addAbsent = () => {
         setAbsent(absent + 1);
-        props.sentAbsent(+1, props.id)
+        props.sentAbsent({change:+1, id: props.id})
     }
 
     const removeAbsent = () => {
         if(absent > 0)
         setAbsent(absent - 1);
-        props.sentAbsent(-1, props.id)
+        props.sentAbsent({change:-1, id:props.id})
     }
 
     const resetAbsent = () => {
         if(absent > 0)
         setAbsent(0);
-        props.sentAbsent(-absent, props.id)
+        props.sentAbsent({change: -absent, id: props.id})
     }
 
     return (

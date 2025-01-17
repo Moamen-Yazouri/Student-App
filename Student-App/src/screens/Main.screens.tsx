@@ -11,7 +11,7 @@ interface IProps {
     hideStudents: () => void;
     scrollLast: () => void;
     handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleTotal: (change: number, id: number) => void;
+    handleTotal: (abs: {change: number, id: number}) => void;
     deleteStudent: (id: number) => void
     handleFilter: (e: React.ChangeEvent<HTMLSelectElement>) => void
     coursesFilter: (e: React.ChangeEvent<HTMLInputElement>) => void

@@ -1,22 +1,21 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import { IStudent } from "../types/student";
 import useLocalStorage from "./useLocalStorage";
-import { STUDENTS_DATA } from "../assets/STUDENTS_DATA";
 import {useSearchParams} from "react-router-dom";
 import useFilter from "./useFilter";
 import { AuthContext } from "../context/AuthContext";
+import reducer from "../stateManager/reducer";
 
 const useStudentManage = () => {
-    const [students, setStudents] = useState<IStudent[]>(STUDENTS_DATA);
-    const[date, setDate] = useState('');
+    const [state, dispatch] = useReducer(reducer, {students: [], totalAbs: 0});
+    const [date, setDate] = useState('');
     const [message, setMessage] = useState('');
     const [isShown, setShown] = useState<boolean>(true);
     const [minAbs, setMinAbs] = useState(0);
     const [maxAbs, setMaxAbs] = useState(6);
-    const [totalAbsent, setTotalAbsent] = useState(0);
     const [params, setParams] = useSearchParams()
-    const {storedData} = useLocalStorage(students, "students-list");
-    const {filteredList} = useFilter(students, params)
+    const {storedData} = useLocalStorage(state.students, "students-list");
+    const {filteredList} = useFilter(state.students, params)
     const stdRef = useRef<HTMLDivElement>(null);
     const timeref = useRef<number>();
     const {logout} = useContext(AuthContext);
@@ -32,15 +31,12 @@ const useStudentManage = () => {
     }
 
     const scrollLast = () => {
-        stdRef.current?.scrollIntoView({behavior: 'smooth'});
+        dispatch({type: 'SCROLL_TO_LAST', payload: stdRef.current})
     }
 
     useEffect(() => {
-        const stdList: IStudent[] = storedData;
         if(storedData) {
-            const totalAbssents: number = stdList.reduce((prev, curr) => curr.absents + prev , 0);
-            setTotalAbsent(totalAbssents);
-            setStudents(storedData);
+            dispatch({type: 'ADD_LOCALSTORAGE', payload: storedData})
         }
     }, [storedData]);
 
@@ -53,24 +49,21 @@ const useStudentManage = () => {
     }
 
     const deleteStudent = (id: number) => {
-        const newList = students.filter(std => std.id !== id);
-        const totalAbsents: number = newList.reduce((prev, curr) => curr.absents + prev , 0);
-        setTotalAbsent(totalAbsents)
-        setStudents(newList);
+        dispatch({type: 'DELETE_STUDENT', payload: id})
     }
 
-    const handleTotal = (change: number, id: number) => {
-        setStudents(students.map(std => std.id == id ? {...std, absents: (std.absents + change)} : std)) 
-        setTotalAbsent(totalAbsent + change)
+    const handleAbsents = (abs: {change: number, id: number}) => {
+        dispatch({type: 'ADD_ABSENT', payload: {change: abs.change, id: abs.id}})
     }
 
     const addNewStudent =  (std: IStudent) => {
-        setStudents([std,...students]);
+        dispatch({type: 'ADD_STUDENT', payload: std})
         setMessage("student added successfuly!");
         setTimeout(() => {
             setMessage('');
         }, 3000)
     }
+
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const query =  e.currentTarget.value;
         if(query.length > 0) { 
@@ -82,10 +75,9 @@ const useStudentManage = () => {
             setParams(params);
         }
     }
+
     const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const filter = e.target.value;
-        console.log(filter);
-        
         if(filter !== "All" ) {
             params.set('graduated', filter);
             setParams(params);
@@ -95,6 +87,7 @@ const useStudentManage = () => {
             setParams(params);
         }
     }
+
     const coursesFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         const checked = e.target.checked;
@@ -106,6 +99,7 @@ const useStudentManage = () => {
         }
         setParams(params);
     }
+
     const filterAbsentsMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const min = e.target.value;
         if(Number(min) == 0) {
@@ -117,6 +111,7 @@ const useStudentManage = () => {
         }
         setParams(params);
     }
+
     const filterAbsentsMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const max = e.currentTarget.value;
         if(Number(max) == 0) {
@@ -134,8 +129,7 @@ const useStudentManage = () => {
         logout();
     }
     return {
-        totalAbsent,
-        students,
+        state,
         stdRef,
         date,
         isShown,
@@ -148,7 +142,7 @@ const useStudentManage = () => {
         showStudents,
         hideStudents,
         deleteStudent,
-        handleTotal,
+        handleAbsents,
         addNewStudent,
         scrollLast,
         handleSearch,

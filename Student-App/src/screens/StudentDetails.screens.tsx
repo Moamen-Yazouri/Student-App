@@ -33,7 +33,7 @@ const StudentDetails = () => {
                         age={currentStd.age}
                         graduated={currentStd.graduated}
                         coursesList={currentStd.coursesList}
-                        sentAbsent={manager.handleTotal}
+                        sentAbsent={manager.handleAbsents}
                         handleDelete={manager.deleteStudent} 
                         id={Number(id)}            
                         />

@@ -65,11 +65,11 @@ function App() {
                     handleSearch={manager.handleSearch}
                     hideStudents={manager.hideStudents}
                     showStudents={manager.showStudents}
-                    handleTotal={manager.handleTotal}
+                    handleTotal={manager.handleAbsents}
                     isShown={manager.isShown}
                     params={manager.params}
                     scrollLast={manager.scrollLast}
-                    totalAbsent={manager.totalAbsent}
+                    totalAbsent={manager.state.totalAbs}
                     stdRef={manager.stdRef}
                     handleFilter={manager.handleFilter}
                     coursesFilter={manager.coursesFilter}
