@@ -1,0 +1,24 @@
+.absents button {
+    background-color: #496181;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 1px 1px 1px #262857;
+    color: #FFF;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.absents button:hover {
+    box-shadow: none;
+}
+.absents button:last-of-type {
+    width: 60px;
+    border-radius: 20px;
+}
+.absents > button {
+    margin-right: 10px;
+}

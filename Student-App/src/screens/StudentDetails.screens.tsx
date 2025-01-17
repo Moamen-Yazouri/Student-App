@@ -1,11 +1,12 @@
 import Student  from '../components/student/student.comp'
 import  { useEffect, useState } from 'react'
 import useStudentManage from '../hooks/useStudentManage'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { IStudent } from '../types/student'
 import retrieveData from '../utils/getFromLocalStorage'
 const StudentDetails = () => {
     const {id} = useParams();
+    const navigate = useNavigate()
     const[currentStd, setCurrentStd] = useState<IStudent>()
     const manager = useStudentManage();
     const students: IStudent[] = retrieveData('students-list');
@@ -15,11 +16,14 @@ const StudentDetails = () => {
             if(std) {
                 setCurrentStd(std)
             }
+            else {
+                navigate('/404');
+            }
         }
     }, [id]);
 
     return (
-        <div>
+        <div className='std-details'>
             {           
                 currentStd &&
                 (

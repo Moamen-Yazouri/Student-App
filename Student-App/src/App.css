@@ -1,24 +1,44 @@
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --main-color: #43618d; 
+  --background-color: #BCCCDC;
+  --text-color: #000000; 
+  --surface-color: #FFFFFF; 
+  --border-color: #3E5879; 
+}
+
+[data-theme="dark"] {
+  --main-color: #BB86FC; 
+  --background-color: #121212; 
+  --text-color: #E0E0E0; 
+  --surface-color: #1E1E1E;  
+  --border-color: #333333; 
+}
+
 #root {
   width: 100%;
   min-height: 100vh;
   padding: 10px;
   margin: auto;
   text-align: center;
-  border: 5px solid #3E5879;
-  background-color: #BCCCDC;
+  border: 5px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color); 
 }
+
 .main-heading {
   font-size: 40px;
-  color: #43618d;
+  color: var(--main-color);
   margin-bottom: 50px;
   margin-left: 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   width: fit-content;
   position: relative;
 }
+
 .main-heading::before {
   content: '';
   position: absolute;
@@ -26,9 +46,10 @@
   left: 50%;
   width: calc(100% - 40px);
   transform: translateX(-50%);
-  background-color: #43618d;
+  background-color: var(--main-color);
   height: 4px;
 }
+
 .main-heading::after {
   content: '';
   position: absolute;
@@ -38,12 +59,12 @@
   bottom: -23px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #43618d;
+  background-color: var(--main-color);
 }
 
 .hide, .show, a {
   cursor: pointer;
-  background-color: #3E5879;
+  background-color: var(--main-color);
   box-shadow: 1px 1px 1px 1px #262857;
   color: #fff;
   border: none;
@@ -51,19 +72,22 @@
   transition: 0.3s;
   text-decoration: none;
 }
+
 .hide,
 .show {
     margin: 30px 10px;
     padding: 10px;
     border: 1px solid #777;
 }
+
 nav {
-  border-top: 3px solid #262857;
-  border-bottom: 3px solid #262857;
+  border-top: 3px solid var(--border-color);
+  border-bottom: 3px solid var(--border-color);
   height: 40px;
   display: flex;
   align-items: center;
 }
+
 nav a {
   margin-right: 10px;
   width: 100px;
@@ -73,43 +97,57 @@ nav a {
   align-items: center;
   justify-content: center;
 }
+
+nav a.active {
+  background-color: var(--surface-color);
+  color: var(--main-color);
+}
+
 .hide:hover, .show:hover,:hover {
   box-shadow: none;
 }
+
 h2 {
   text-align: left;
   margin-left: 20px;
-  color: #777;
+  color: var(--text-color);
   font-size: 16px;
 }
+
 .search {
-  width: 100%;
   text-align-last: left;
-  margin-bottom: 20px;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
 }
+
 .search label {
-  color: #3E5879;
+  color: var(--main-color);
   font-weight: 700;
   font-size: 18px;
 }
+
 .search input {
   height: 30px;
   width: 250px;
   transition: 0.3s;
-  caret-color: #43618d;
+  caret-color: var(--main-color);
 }
+
 .search input::placeholder {
-  transition: 0.3S;
-  color: #43618d;
+  transition: 0.3s;
+  color: var(--main-color);
 }
+
 .search input:focus::placeholder {
   opacity: 0;
 }
+
 .search input:focus {
-  border: 2px solid #3E5879;
+  border: 2px solid var(--main-color);
   outline: none;
 }
+
 .students-container {
   display: flex;
   align-items: stretch;
@@ -119,9 +157,90 @@ h2 {
   margin-top: 50px;
 }
 
+.std-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
 
+.not-found {
+  padding: 100px;
+}
 
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+}
 
+.grad {
+  display: flex;
+  align-items: center;
+}
 
+.filters select {
+  height: 30px;
+}
 
+.courses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
 
+.login-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 30px;
+}
+
+.prof-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin: 0 auto;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.toggle-mode {
+  background-color: #fff;
+  width: 90px;
+  height: 28px;
+  border-radius: 20px;
+  position: relative;
+}
+.toggle .toggle-mode.light::before,
+.toggle .toggle-mode.dark::before {
+  content: '';
+  position: absolute;
+  background-color: var(--main-color);
+  height: 24px;
+  width: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.toggle .toggle-mode.dark::before {
+  right: 4px;
+}
+.toggle .toggle-mode.light::before {
+  left: 4px;
+}
+.toggle span:first-child {
+  color: var(--main-color);
+}

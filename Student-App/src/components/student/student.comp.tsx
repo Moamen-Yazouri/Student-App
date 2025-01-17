@@ -4,6 +4,7 @@ import CoursesList from '../courses-list/courses-list.comp';
 import './student.css';
 import { Trash } from '@phosphor-icons/react';
 import { Link } from 'react-router';
+import Absents from '../Absents.comp.tsx/Absents';
 interface IProps extends IStudent {
     sentAbsent: (change: number, id: number) => void;
     handleDelete: (id: number) => void;
@@ -54,10 +55,15 @@ const Student = forwardRef<HTMLDivElement, IProps>((props, ref) => {
                 <br/>
                 isGraduated: <span className={`${props.graduated ? "yes" : "no"}  `}>{props.graduated ? "Yes" : "No"}</span>
             </p>
-            <button onClick= {addAbsent}>+</button>
-            <button onClick= {removeAbsent}>-</button>
-            <button onClick= {resetAbsent}>Reset</button>
-            <p>Absents: <span style={absentColor}>{absent}</span></p>
+
+            <Absents 
+            absent={absent} 
+            absentColor={absentColor} 
+            addAbsent={addAbsent} 
+            removeAbsent={removeAbsent} 
+            resetAbsent={resetAbsent}
+            />
+
             <Trash className='delete' size={32} weight="bold" color='red' onClick={() => props.handleDelete(props.id)}/>
             <CoursesList list= {props.coursesList}/>
         </div>

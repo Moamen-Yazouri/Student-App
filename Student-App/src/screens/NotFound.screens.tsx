@@ -1,12 +1,12 @@
 
 const NotFound = () => {
     return (
-        <>
-            <h2 style={{textAlign: 'center'}}>Cannot Found The Page 404</h2>
+        <div className="not-found">
+            <h2 style={{textAlign: 'center'}}>Page Not Found (404)</h2>
             <p>
-                We Cannot Find This Page.
+                We Cannot Find The page you are looking for.
             </p>
-        </>  
+        </div>  
     )
 }
 

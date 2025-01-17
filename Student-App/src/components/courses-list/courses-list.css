@@ -1,16 +1,28 @@
-ul {
+:root {
+    --ul-background: #BCCCDC; 
+    --li-background: #3E5879;
+    --li-text-color: #fff; 
+  }
+  
+  [data-theme="dark"] {
+    --ul-background: #1E1E1E; 
+    --li-background: #333333; 
+    --li-text-color: #E0E0E0;
+  }
+  
+  ul {
     list-style: none;
     margin: 10px 0;
-    background-color: #BCCCDC;
+    background-color: var(--ul-background);
     padding: 5px;
     border-radius: 20px;
     max-width: 100%;
-}
-
-ul li {
-    background-color: #3E5879 !important;
-    color: #fff;
+  }
+  
+  ul li {
+    background-color: var(--li-background) !important;
+    color: var(--li-text-color);
     padding: 10px;
     border-radius: 20px;
-    margin: 20px 0 !important; 
-}
+    margin: 20px 0 !important;
+  }
