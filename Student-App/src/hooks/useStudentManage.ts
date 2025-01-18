@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import reducer from "../stateManager/reducer";
 
 const useStudentManage = () => {
-    const [state, dispatch] = useReducer(reducer, {students: [], totalAbs: 0});
+    const [state, dispatch] = useReducer(reducer, {students: JSON.parse(localStorage.getItem('students-list') || '[]'), totalAbs: 0});
     const [date, setDate] = useState('');
     const [message, setMessage] = useState('');
     const [isShown, setShown] = useState<boolean>(true);
@@ -18,6 +18,13 @@ const useStudentManage = () => {
     const {filteredList} = useFilter(state.students, params)
     const stdRef = useRef<HTMLDivElement>(null);
     const timeref = useRef<number>();
+
+    useEffect(() => {
+        if(storedData) {
+            dispatch({type: 'ADD_LOCALSTORAGE', payload: storedData})
+        }
+    }, [storedData]);
+
     const {logout} = useContext(AuthContext);
     useEffect(() => {
         timeref.current = setInterval(() => {
@@ -34,11 +41,6 @@ const useStudentManage = () => {
         dispatch({type: 'SCROLL_TO_LAST', payload: stdRef.current})
     }
 
-    useEffect(() => {
-        if(storedData) {
-            dispatch({type: 'ADD_LOCALSTORAGE', payload: storedData})
-        }
-    }, [storedData]);
 
     const showStudents = () => {
         setShown(true)

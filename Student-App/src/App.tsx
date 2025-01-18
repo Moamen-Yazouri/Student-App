@@ -51,8 +51,8 @@ function App() {
             <NavLink to='/'  className={({isActive}) =>(isActive ? "active" : "")}>Home Page</NavLink>
             <NavLink to = '/form' className={({isActive}) =>(isActive ? "active" : "")}>Add Student</NavLink>
             <NavLink to = '/about' className={({isActive}) =>(isActive ? "active" : "")}>About Page</NavLink>
-            
           </nav>
+
           <Routes>
             <Route path='/login' element={<Login/>}/>
             <Route 
@@ -78,10 +78,12 @@ function App() {
                 />
               } 
             />
+
             <Route path="/form" element={<AddStudent onSubmit={manager.addNewStudent} message={manager.message}/>} />
             <Route path="/about" element={<About/>}/>
             <Route path="/student/:id" element={<StudentDetails/>}/>
             <Route path="*" element={<NotFound/>}/>
+
           </Routes>
         </>
   )
