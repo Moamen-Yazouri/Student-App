@@ -7,7 +7,9 @@ import { AuthContext } from "../context/AuthContext";
 import reducer from "../stateManager/reducer";
 
 const useStudentManage = () => {
-    const [state, dispatch] = useReducer(reducer, {students: JSON.parse(localStorage.getItem('students-list') || '[]'), totalAbs: 0});
+    const data: IStudent[] = JSON.parse(localStorage.getItem('students-list') || '[]');
+    const absData = data.reduce((curr, prev) => {return prev.absents + curr }, 0)
+    const [state, dispatch] = useReducer(reducer, {students: data, totalAbs: absData});
     const [date, setDate] = useState('');
     const [message, setMessage] = useState('');
     const [isShown, setShown] = useState<boolean>(true);

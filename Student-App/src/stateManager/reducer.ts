@@ -52,7 +52,7 @@ const reducer = (state: IState, action: Action): IState => {
         }
 
         case 'SCROLL_TO_LAST': {
-            action.payload?.scrollIntoView();
+            action.payload?.scrollIntoView({behavior: 'smooth'});
             return state;
         }
 

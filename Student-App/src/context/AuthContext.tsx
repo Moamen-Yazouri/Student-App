@@ -1,5 +1,6 @@
-import { createContext, useState} from "react";
+import { createContext, useEffect, useState} from "react";
 import IUserData from "../types/user";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 interface IAuthContext {
     login: (data: IUserData) => void
@@ -14,6 +15,10 @@ const AuthContext = createContext<IAuthContext>({user: null, login: () => {}, lo
 
 const AuthProvider = (props: IProps) => {
     const [user, setUser] = useState<IUserData | null>(null);
+    const {storedData} = useLocalStorage(user, "user-data");
+    useEffect(() => {
+        setUser(storedData);
+    }, [storedData])
     const login = (data: IUserData) => {
         setUser(data);
     }

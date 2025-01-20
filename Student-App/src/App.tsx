@@ -3,26 +3,20 @@ import Main from './screens/Main.screens';
 import StudentDetails from './screens/StudentDetails.screens';
 import About from './screens/About.screens';
 import NotFound from './screens/NotFound.screens';
-import {NavLink, Route, Routes} from 'react-router-dom';
-import AddStudent from './screens/Form.screen';
 import useStudentManage from './hooks/useStudentManage';
-import { AuthContext} from './context/AuthContext';
+import AddStudent from './screens/Form.screen';
 import Login from './components/login/Login.comp';
-import { useContext, useEffect} from 'react';
 import Profile from './components/Profile/profile.comp';
+import {NavLink, Route, Routes} from 'react-router-dom';
+import { AuthContext} from './context/AuthContext';
+import { useContext, useEffect} from 'react';
 import {themeContext} from './main';
-import useLocalStorage from './hooks/useLocalStorage';
+import Garded from './components/common/garded-route.comp';
+import Role from './types/role';
 function App() {
   const manager = useStudentManage();
-  const {user, login} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const {theme, setTheme} = useContext(themeContext); 
-  const {storedData} = useLocalStorage(user, 'user-info');
-
-  useEffect (() => {
-    if(storedData) {
-      login(storedData)
-    }
-  }, [storedData])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
@@ -79,11 +73,11 @@ function App() {
               } 
             />
 
-            <Route path="/form" element={<AddStudent onSubmit={manager.addNewStudent} message={manager.message}/>} />
+            <Route path="/form" element={<Garded role={[Role.Admin]}><AddStudent onSubmit={manager.addNewStudent} message={manager.message}/></Garded>} />
             <Route path="/about" element={<About/>}/>
-            <Route path="/student/:id" element={<StudentDetails/>}/>
+            <Route path="/student/:id" element={<Garded role={[Role.Admin]}><StudentDetails/></Garded>}/>
             <Route path="*" element={<NotFound/>}/>
-
+              
           </Routes>
         </>
   )
