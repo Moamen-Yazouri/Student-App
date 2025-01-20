@@ -1,6 +1,6 @@
 import './Login.css'
 import { useContext } from "react"
-import { AuthContext, AuthProvider } from "../../context/AuthContext"
+import { AuthContext, AuthProvider } from "../../Providers/AuthContext"
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {

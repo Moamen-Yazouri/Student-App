@@ -1,25 +1,24 @@
 import Student  from '../components/student/student.comp'
-import  { useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import useStudentManage from '../hooks/useStudentManage'
 import { useNavigate, useParams } from 'react-router-dom'
 import { IStudent } from '../types/student'
 import retrieveData from '../utils/getFromLocalStorage'
+import { StateContext } from '../Providers/StateContext'
 const StudentDetails = () => {
     const {id} = useParams();
     const navigate = useNavigate()
-    const[currentStd, setCurrentStd] = useState<IStudent>()
-    const manager = useStudentManage();
-    const students: IStudent[] = retrieveData('students-list');
+    const[currentStd, setCurrentStd] = useState<IStudent>();
+    const {state, dispatch} = useContext(StateContext);
+
     useEffect(() => {
-        if(students) {
-            const std = students.find(item => item.id == Number(id)); 
+            const std = state.students.find(item => item.id == Number(id)); 
             if(std) {
                 setCurrentStd(std)
             }
             else {
                 navigate('/404');
             }
-        }
     }, [id]);
 
     return (
@@ -33,8 +32,7 @@ const StudentDetails = () => {
                         age={currentStd.age}
                         graduated={currentStd.graduated}
                         coursesList={currentStd.coursesList}
-                        sentAbsent={manager.handleAbsents}
-                        handleDelete={manager.deleteStudent} 
+                        handleDelete={() => dispatch({type: 'DELETE_STUDENT', payload: currentStd.id})} 
                         id={Number(id)}            
                         />
                 )

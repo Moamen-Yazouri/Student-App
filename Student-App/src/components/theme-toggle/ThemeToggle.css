@@ -1,0 +1,35 @@
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .toggle-mode {
+    background-color: #fff;
+    width: 90px;
+    height: 28px;
+    border-radius: 20px;
+    position: relative;
+  }
+  .toggle .toggle-mode.light::before,
+  .toggle .toggle-mode.dark::before {
+    content: '';
+    position: absolute;
+    background-color: var(--main-color);
+    height: 24px;
+    width: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  .toggle .toggle-mode.dark::before {
+    right: 4px;
+  }
+  .toggle .toggle-mode.light::before {
+    left: 4px;
+  }
+  .toggle span:first-child {
+    color: var(--main-color);
+  }

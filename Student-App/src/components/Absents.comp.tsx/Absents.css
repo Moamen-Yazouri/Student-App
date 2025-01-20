@@ -1,24 +1,52 @@
+:root {
+    --absents-button-bg-light: #496181;
+    --absents-button-bg-dark: #3b3d41;
+    --absents-button-shadow-light: #262857;
+    --absents-button-shadow-dark: #535e6d;
+    --absents-button-text-light: #FFF;
+    --absents-button-text-dark: #E0E0E0;
+}
+
+[data-theme="dark"] {
+    --absents-button-bg: var(--absents-button-bg-dark);
+    --absents-button-shadow: var(--absents-button-shadow-dark);
+    --absents-button-text: var(--absents-button-text-dark);
+}
+
 .absents button {
-    background-color: #496181;
+    background-color: var(--absents-button-bg-light);
     width: 30px;
     height: 30px;
     border-radius: 50%;
     border: none;
-    box-shadow: 1px 1px 1px 1px #262857;
-    color: #FFF;
+    box-shadow: 1px 1px 1px 1px var(--absents-button-shadow-light);
+    color: var(--absents-button-text-light);
     cursor: pointer;
     text-align: center;
     font-size: 15px;
     font-weight: bold;
     transition: 0.3s;
 }
+
 .absents button:hover {
     box-shadow: none;
 }
+
 .absents button:last-of-type {
     width: 60px;
     border-radius: 20px;
 }
+
 .absents > button {
     margin-right: 10px;
+}
+
+
+[data-theme="dark"] .absents button {
+    background-color: var(--absents-button-bg-dark);
+    box-shadow: 1px 1px 1px 1px var(--absents-button-shadow-dark);
+    color: var(--absents-button-text-dark);
+}
+[data-theme="dark"] .absents button:hover {
+    box-shadow: none;
 }

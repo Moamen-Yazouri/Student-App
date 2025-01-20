@@ -1,56 +1,123 @@
+:root {
+    --form-bg-light: #BCCCDC;
+    --form-bg-dark: #333333;
+    --form-text-light: #3E5879;
+    --form-text-dark: #E0E0E0;
+    --form-button-bg-light: #3E5879;
+    --form-button-bg-dark: #285ca5;
+    --form-button-shadow-light: #262857;
+    --form-button-shadow-dark: #6482AD;
+    --form-list-bg-light: #BCCCDC;
+    --form-list-bg-dark: #333333;
+    --form-delete-hover-light: #3E5879;
+    --form-delete-hover-dark: #285ca5;
+}
+
+[data-theme="dark"] {
+    --form-bg: var(--form-bg-dark);
+    --form-text: var(--form-text-dark);
+    --form-button-bg: var(--form-button-bg-dark);
+    --form-button-shadow: var(--form-button-shadow-dark);
+    --form-list-bg: var(--form-list-bg-dark);
+    --form-delete-hover: var(--form-delete-hover-dark);
+}
+
 form {
-    background-color: #BCCCDC;
+    background-color: var(--form-bg-light);
     padding: 10px 15px;
-    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     width: 400px;
-    margin: 0 auto;
+    margin: 30px auto;
     border-radius: 20px;
 }
+
 form #courseName {
     margin: 0;
     margin-left: 10px;
+    color: var(--form-text-light);
 }
+
 form label {
-    color: #3E5879;
+    color: var(--form-text-light);
     font-weight: 900;
 }
+
 form div {
     width: 100%;
     margin-top: 10px;
 }
-form  .add-course {
+
+form .add-course {
     padding: 5px 10px;
     cursor: pointer;
-    background-color: #3E5879 !important;
-    box-shadow: 1px 1px 1px 1px #262857;
+    background-color: var(--form-button-bg-light) !important;
+    box-shadow: 1px 1px 1px 1px var(--form-button-shadow-light);
     border: none !important;
     border-radius: 10px !important;
-} 
-form  .add-course:hover {
+    color: white;
+}
+
+form .add-course:hover {
     box-shadow: none;
     opacity: 1 !important;
 }
+
 ul {
     margin: 0 auto;
     width: 400px;
+    background-color: var(--form-list-bg-light);
 }
+
 .form-list {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
+
 .delete-course {
     align-self: flex-end;
     position: absolute;
     left: 40px;
     cursor: pointer;
     transition: 0.3s;
+    color: var(--form-text-light);
 }
+
 .delete-course:hover {
     transform: scale(1.1);
+    color: var(--form-delete-hover-light);
+}
+
+
+[data-theme="dark"] form {
+    background-color: var(--form-bg-dark);
+}
+
+[data-theme="dark"] form #courseName {
+    color: var(--form-text-dark);
+}
+
+[data-theme="dark"] form label {
+    color: var(--form-text-dark);
+}
+
+[data-theme="dark"] form .add-course {
+    background-color: var(--form-button-bg-dark) !important;
+    box-shadow: 1px 1px 1px 1px var(--form-button-shadow-dark);
+}
+
+[data-theme="dark"] ul {
+    background-color: var(--form-list-bg-dark);
+}
+
+[data-theme="dark"] .delete-course {
+    color: var(--form-text-dark);
+}
+
+[data-theme="dark"] .delete-course:hover {
+    color: var(--form-delete-hover-dark);
 }

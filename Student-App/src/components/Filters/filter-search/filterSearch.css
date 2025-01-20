@@ -1,0 +1,33 @@
+.search {
+    text-align-last: left;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search label {
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: 18px;
+  }
+  
+  .search input {
+    height: 30px;
+    width: 250px;
+    transition: 0.3s;
+    caret-color: var(--main-color);
+  }
+  
+  .search input::placeholder {
+    transition: 0.3s;
+    color: var(--main-color);
+  }
+  
+  .search input:focus::placeholder {
+    opacity: 0;
+  }
+  
+  .search input:focus {
+    border: 2px solid var(--main-color);
+    outline: none;
+  }

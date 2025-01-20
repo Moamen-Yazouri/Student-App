@@ -1,101 +1,37 @@
-import React from "react";
+import { useContext } from "react";
 import Student from "../components/student/student.comp";
-import { IStudent } from "../types/student";
-interface IProps {
-    totalAbsent: number;
-    params: URLSearchParams;
-    isShown: boolean;
-    filteredList: IStudent[];
-    stdRef: React.RefObject<HTMLDivElement>;
-    showStudents: () => void;
-    hideStudents: () => void;
-    scrollLast: () => void;
-    handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    handleTotal: (abs: {change: number, id: number}) => void;
-    deleteStudent: (id: number) => void
-    handleFilter: (e: React.ChangeEvent<HTMLSelectElement>) => void
-    coursesFilter: (e: React.ChangeEvent<HTMLInputElement>) => void
-    filterAbsentsMin: (e: React.ChangeEvent<HTMLInputElement>) => void
-    filterAbsentsMax: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
-const COURSES_LIIST = ["Angular", "React", "Vue", "Next", "HTML", "JS"]
-const Main = (props: IProps) => {
+import useStudentManage from "../hooks/useStudentManage";
+import { StateContext } from "../Providers/StateContext";
+import FilterSearch from "../components/Filters/filter-search/filterSearch.comp";
+import FilterGraduate from "../components/Filters/filter-graduated/filterGraduated.comp";
+import FilterCourses from "../components/Filters/filter-courses/filterCourses.comp";
+import FilterAbsents from "../components/Filters/filter-absents/filterAbsents.comp";
+const Main = () => {
+    const manager = useStudentManage();
+    const {state} = useContext(StateContext);
     return (
         <>
             
-            <button className= "show" onClick= {props.showStudents} >Show Students</button>
-            <button className= "hide" onClick= {props.hideStudents} >Hide Students</button>
-            <button className= "hide" onClick={props.scrollLast} >Scroll Students</button>
+            <button className= "show" onClick= {manager.showStudents} >Show Students</button>
+            <button className= "hide" onClick= {manager.hideStudents} >Hide Students</button>
+            <button className= "hide" onClick={manager.scrollLast} >Scroll Students</button>
             <div className="filters">
-                <div className="search">
-                    <input 
-                    type="text"
-                    placeholder="Search by name" 
-                    onChange={props.handleSearch} 
-                    value={props.params.get('q') || ''
-                    }/>
-                </div>
-                <div className="filter grad">
-                <select value={props.params.get("graduated") || "All"} onChange={props.handleFilter}>
-                    <option value="All">All</option>
-                    <option value="Graduated">Graduated</option>
-                    <option value="Un-graduted">Un-graduated</option>
-                </select>
-                </div>
-                <div className="filter courses">
-                    {
-                        COURSES_LIIST.map(c => (
-                            <div key={c} className="course" >
-                                <input type="checkbox"
-                                id={c}
-                                value={c}
-                                onChange={props.coursesFilter}
-                                checked={props.params.getAll('courses').includes(c) || false}
-                                />
-                                <label htmlFor="">{c}</label>
-                            </div>
-                        ))
-                    }
-                </div>
-                <div className="filterAbsents">
-                    <h3 className="absents">Absents:</h3>
-                    <div className="selection">
-                        <div className="min">
-                            <label htmlFor="">From: <span>{Number(props.params.get('minAbs')) || 0}</span></label>
-                            <input
-                            value={Number(props.params.get('minAbs')) || 0}
-                            type="range"
-                            name="min"
-                            id=""
-                            min={0} 
-                            max={5} 
-                            step={1} 
-                            onChange={props.filterAbsentsMin} 
-                            />
-                        </div>
-                        <div className="max">
-                        <label htmlFor="">To: <span>{Number(props.params.get('maxAbs')) || 0}</span></label>
-                        <input 
-                        value={Number(props.params.get('maxAbs')) || 0}
-                        type="range" 
-                        name="" 
-                        id="max" 
-                        min={0} 
-                        max={15} 
-                        step={1} 
-                        onChange={props.filterAbsentsMax} 
-                        />
-                        </div>
-                    </div>
-                </div>
+                <FilterSearch handleSearch={manager.handleSearch} params={manager.params}/>
+                <FilterGraduate handleFilter={manager.handleFilter} params={manager.params}/>
+                <FilterCourses coursesFilter={manager.coursesFilter} params={manager.params}/>
+                <FilterAbsents 
+                    filterAbsentsMax={manager.filterAbsentsMax} 
+                    filterAbsentsMin={manager.filterAbsentsMin} 
+                    params={manager.params}
+                />
             </div>
-            <h2>Total Absents : {props.totalAbsent}</h2>
+            <h2>Total Absents : {state.totalAbs}</h2>
             <div className="students-container">
                 {
-                    props.isShown && (
-                        props.filteredList.map( (std, index, arr) => (
+                    manager.isShown && (
+                        manager.filteredList.map( (std, index, arr) => (
                         <Student
-                            ref= {index == arr.length - 1 ? props.stdRef : null}
+                            ref= {index == arr.length - 1 ? manager.stdRef : null}
                             key={std.id} 
                             absents={std.absents}
                             name= {std.name}
@@ -103,8 +39,7 @@ const Main = (props: IProps) => {
                             id={std.id}
                             graduated={std.graduated}
                             coursesList={std.coursesList} 
-                            sentAbsent={props.handleTotal}
-                            handleDelete={props.deleteStudent}
+                            handleDelete={manager.deleteStudent}
                         />
                         ))
                     )

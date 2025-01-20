@@ -1,27 +1,58 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Absents.css';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../Providers/AuthContext';
+import { StateContext } from '../../Providers/StateContext';
 interface IAbsents {
-    removeAbsent: () => void;
-    resetAbsent: () => void;
-    addAbsent: () => void;
-    absent: number;
-    absentColor: Object
+    id: number;
+    initialAbs: number;
 }
 
 const Absents = (props: IAbsents) => {
     const {user} = useContext(AuthContext);
+    const [absent, setAbsent] = useState(props.initialAbs);
+    const {dispatch} = useContext(StateContext);
+    
+
+    const [absentColor, setAbsentColor] = useState<Object>({});
+    useEffect(() => {
+        if(absent >= 5 && absent < 10) {
+            setAbsentColor({color: "#EB5B00"});
+        }
+        else if(absent >= 10) {
+            setAbsentColor({color: "#FF0000"});
+        }
+        else {
+            setAbsentColor({});
+        }
+    }, [absent])
+
+    const addAbsent = () => {
+        setAbsent(absent + 1);
+        dispatch({type: 'ADD_ABSENT', payload: {change:+1, id: props.id}});
+    }
+
+    const removeAbsent = () => {
+        if(absent > 0)
+        setAbsent(absent - 1);
+        dispatch({type: 'ADD_ABSENT', payload: {change:-1, id: props.id}});
+    }
+
+    const resetAbsent = () => {
+        if(absent > 0)
+        setAbsent(0);
+        dispatch({type: 'ADD_ABSENT', payload: {change: -absent, id: props.id}});
+    }
     return (
         <div className="absents">
             {
                 user ? <>
-                <button onClick= {props.addAbsent}>+</button>
-                <button onClick= {props.removeAbsent}>-</button>
-                <button onClick= {props.resetAbsent}>Reset</button> 
+                <button onClick= {addAbsent}>+</button>
+                <button onClick= {removeAbsent}>-</button>
+                <button onClick= {resetAbsent}>Reset</button> 
                 </>
                 : <div></div>
             }
-            <p>Absents: <span style={props.absentColor}>{props.absent}</span></p>
+            <p>Absents: <span style={absentColor}>{absent}</span></p>
         </div>
     )
 }

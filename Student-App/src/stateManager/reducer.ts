@@ -1,11 +1,11 @@
 import { IStudent } from "../types/student";
 
-interface IState {
+export interface IState {
     students: IStudent[];
     totalAbs: number;
 }
 
-type Action =   {type: 'ADD_LOCALSTORAGE', payload: IStudent[]} |
+export type Action =   {type: 'ADD_LOCALSTORAGE', payload: IStudent[]} |
                 {type: 'ADD_STUDENT', payload: IStudent} |
                 {type: 'ADD_ABSENT', payload: {id: number, change: number}} |
                 {type: 'DELETE_STUDENT', payload: number} |

@@ -1,0 +1,12 @@
+.filter select {
+    height: 30px;
+    color: var(--main-color);
+}
+
+.filter select option {
+    color: var(--main-color);
+}
+.filter select option:focus {
+    outline: none;
+    border: 1px solid var(--main-color);
+}

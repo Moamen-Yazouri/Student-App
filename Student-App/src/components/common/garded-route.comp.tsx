@@ -1,6 +1,6 @@
 import "./garded-route.css";
 import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../Providers/AuthContext';
 import { Link } from 'react-router-dom';
 import Role from "../../types/role";
 interface IProps {

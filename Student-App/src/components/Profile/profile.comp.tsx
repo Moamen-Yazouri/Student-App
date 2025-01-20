@@ -1,6 +1,6 @@
 import './profile.css';
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../Providers/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {

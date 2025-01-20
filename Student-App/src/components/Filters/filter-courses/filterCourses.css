@@ -1,0 +1,18 @@
+.courses {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.course  input {
+    height: 25px;
+    width: 25px;
+}
+.course {
+    display: flex;
+    gap: 2px;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 18px;
+}

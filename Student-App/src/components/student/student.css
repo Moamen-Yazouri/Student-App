@@ -1,23 +1,23 @@
 :root {
-    --student-background: #3E5879; /* Default light mode background */
-    --student-text-color: #F8FAFC; /* Default light mode text color */
-    --student-secondary-text: #f3f0ed; /* Default light mode secondary text */
-    --student-span-yes: rgb(11, 184, 11); /* Default light mode "yes" color */
-    --student-span-no: yellow; /* Default light mode "no" color */
-    --student-details-bg: #fff; /* Default light mode details background */
-    --student-details-text: #262857; /* Default light mode details text */
-    --student-shadow: #262857; /* Default light mode shadow color */
+    --student-background: #3E5879; 
+    --student-text-color: #F8FAFC; 
+    --student-secondary-text: #f3f0ed;
+    --student-span-yes: rgb(11, 184, 11);
+    --student-span-no: yellow; 
+    --student-details-bg: #fff; 
+    --student-details-text: #262857; 
+    --student-shadow: #262857; 
   }
   
   [data-theme="dark"] {
-    --student-background: #1E1E1E; /* Dark mode background */
-    --student-text-color: #E0E0E0; /* Dark mode text color */
-    --student-secondary-text: #BBBBBB; /* Dark mode secondary text */
-    --student-span-yes: #03DAC6; /* Dark mode "yes" color */
-    --student-span-no: #BB86FC; /* Dark mode "no" color */
-    --student-details-bg: #333333; /* Dark mode details background */
-    --student-details-text: #E0E0E0; /* Dark mode details text */
-    --student-shadow: #000000; /* Dark mode shadow color */
+    --student-background: #1E1E1E;
+    --student-text-color: #E0E0E0; 
+    --student-secondary-text: #BBBBBB; 
+    --student-span-yes: #03DAC6; 
+    --student-span-no: #BB86FC; 
+    --student-details-bg: #333333; 
+    --student-details-text: #E0E0E0; 
+    --student-shadow: #000000; 
   }
   
   .student-wrapper {

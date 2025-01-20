@@ -1,0 +1,7 @@
+.filterAbsents {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px;
+}

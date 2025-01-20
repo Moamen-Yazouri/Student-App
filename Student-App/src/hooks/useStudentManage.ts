@@ -3,37 +3,20 @@ import { IStudent } from "../types/student";
 import useLocalStorage from "./useLocalStorage";
 import {useSearchParams} from "react-router-dom";
 import useFilter from "./useFilter";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../Providers/AuthContext";
 import reducer from "../stateManager/reducer";
+import { StateContext } from "../Providers/StateContext";
 
 const useStudentManage = () => {
-    const data: IStudent[] = JSON.parse(localStorage.getItem('students-list') || '[]');
-    const absData = data.reduce((curr, prev) => {return prev.absents + curr }, 0)
-    const [state, dispatch] = useReducer(reducer, {students: data, totalAbs: absData});
-    const [date, setDate] = useState('');
-    const [message, setMessage] = useState('');
+    const {state, dispatch} = useContext(StateContext);
     const [isShown, setShown] = useState<boolean>(true);
     const [minAbs, setMinAbs] = useState(0);
     const [maxAbs, setMaxAbs] = useState(6);
     const [params, setParams] = useSearchParams()
-    const {storedData} = useLocalStorage(state.students, "students-list");
     const {filteredList} = useFilter(state.students, params)
     const stdRef = useRef<HTMLDivElement>(null);
     const timeref = useRef<number>();
-
-    useEffect(() => {
-        if(storedData) {
-            dispatch({type: 'ADD_LOCALSTORAGE', payload: storedData})
-        }
-    }, [storedData]);
-
     const {logout} = useContext(AuthContext);
-    useEffect(() => {
-        timeref.current = setInterval(() => {
-        setDate(new Date().toLocaleTimeString());
-    }, 1000);
-
-    }, [])
 
     const stopTime = () => {
         clearInterval(timeref.current);
@@ -60,13 +43,6 @@ const useStudentManage = () => {
         dispatch({type: 'ADD_ABSENT', payload: {change: abs.change, id: abs.id}})
     }
 
-    const addNewStudent =  (std: IStudent) => {
-        dispatch({type: 'ADD_STUDENT', payload: std})
-        setMessage("student added successfuly!");
-        setTimeout(() => {
-            setMessage('');
-        }, 3000)
-    }
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const query =  e.currentTarget.value;
@@ -133,13 +109,10 @@ const useStudentManage = () => {
         logout();
     }
     return {
-        state,
         stdRef,
-        date,
         isShown,
         filteredList,
         params,
-        message,
         minAbs,
         maxAbs,
         stopTime,
@@ -147,7 +120,6 @@ const useStudentManage = () => {
         hideStudents,
         deleteStudent,
         handleAbsents,
-        addNewStudent,
         scrollLast,
         handleSearch,
         handleFilter,
