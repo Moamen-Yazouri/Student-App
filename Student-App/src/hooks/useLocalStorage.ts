@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 const useLocalStorage = (state: any, storageKey: string) => {
-    const[storedData, setStoredData] = useState<any>(null);
-
+    const[storedData, setStoredData] = useState<any>(state);
+    const initRef = useRef(true);
     useEffect(()=>{
         const strData = localStorage.getItem(storageKey);
         try{
@@ -18,6 +18,10 @@ const useLocalStorage = (state: any, storageKey: string) => {
     }, []);
 
     useEffect(() => {
+        if(initRef.current) {
+            initRef.current = false;
+            return;
+        }
         if(typeof state === 'object') {
             localStorage.setItem(storageKey, JSON.stringify(state));
         }

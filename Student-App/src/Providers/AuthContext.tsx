@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState} from "react";
+import { createContext, useLayoutEffect, useState} from "react";
 import IUserData from "../types/user";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -11,13 +11,16 @@ interface IAuthContext {
 interface IProps {
     children: React.ReactNode;
 }
-const AuthContext = createContext<IAuthContext>({user: null, login: () => {}, logout: () => {}})
+const INIT_USER = JSON.parse(localStorage.getItem("user-data") || "[]");
+const AuthContext = createContext<IAuthContext>({user: INIT_USER, login: () => {}, logout: () => {}})
 
 const AuthProvider = (props: IProps) => {
-    const [user, setUser] = useState<IUserData | null>(null);
+    const [user, setUser] = useState<IUserData | null>(INIT_USER);
     const {storedData} = useLocalStorage(user, "user-data");
-    useEffect(() => {
-        setUser(storedData);
+    
+    useLayoutEffect(() => {
+        if(storedData) 
+            setUser(storedData);
     }, [storedData])
     const login = (data: IUserData) => {
         setUser(data);

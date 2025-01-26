@@ -1,10 +1,7 @@
-import { useContext, useEffect, useReducer, useRef, useState } from "react";
-import { IStudent } from "../types/student";
-import useLocalStorage from "./useLocalStorage";
+import { useContext, useRef, useState } from "react";
 import {useSearchParams} from "react-router-dom";
 import useFilter from "./useFilter";
 import { AuthContext } from "../Providers/AuthContext";
-import reducer from "../stateManager/reducer";
 import { StateContext } from "../Providers/StateContext";
 
 const useStudentManage = () => {
